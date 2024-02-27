@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">newbank</span>
+
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">Activity</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">content</span><span class="s2">.</span><span class="s1">Intent</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">provider</span><span class="s2">.</span><span class="s1">AlarmClock</span><span class="s2">.</span><span class="s1">EXTRA_MESSAGE</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">view</span><span class="s2">.</span><span class="s1">View</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span>
+
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity</span><span class="s2">() {</span>
+    <span class="s0">val </span><span class="s1">COD_TELA </span><span class="s2">= </span><span class="s3">2</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_main</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fun </span><span class="s1">btnPix_click</span><span class="s2">(</span><span class="s1">view: View</span><span class="s2">) {</span>
+        <span class="s0">val </span><span class="s1">txtSaldo </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">txtSaldo</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">saldo </span><span class="s2">= </span><span class="s1">txtSaldo</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">intent </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">pixActivity::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">putExtra</span><span class="s2">(</span><span class="s4">&quot;sSaldo&quot;</span><span class="s2">, </span><span class="s1">saldo</span><span class="s2">)</span>
+        <span class="s2">}</span>
+        <span class="s1">startActivity</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">)</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s1">COD_TELA</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s1">requestCode: Int</span><span class="s2">, </span><span class="s1">resultCode: Int</span><span class="s2">, </span><span class="s1">data: Intent?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onActivityResult</span><span class="s2">(</span><span class="s1">requestCode</span><span class="s2">, </span><span class="s1">resultCode</span><span class="s2">, </span><span class="s1">data</span><span class="s2">)</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">requestCode </span><span class="s2">== </span><span class="s1">COD_TELA </span><span class="s2">&amp;&amp; </span><span class="s1">resultCode </span><span class="s2">== </span><span class="s1">Activity</span><span class="s2">.</span><span class="s1">RESULT_OK</span><span class="s2">){</span>
+        <span class="s0">val </span><span class="s1">txtSaldo </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">txtSaldo</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">sSaldo </span><span class="s2">= </span><span class="s1">data</span><span class="s2">!!.</span><span class="s1">getStringExtra</span><span class="s2">(</span><span class="s4">&quot;sSaldo&quot;</span><span class="s2">)</span>
+        <span class="s1">txtSaldo</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">sSaldo</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+    <span class="s0">fun </span><span class="s1">btnPagar_click</span><span class="s2">() {</span>
+        <span class="s0">val </span><span class="s1">txtSaldo </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">txtSaldo</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">saldo </span><span class="s2">= </span><span class="s1">txtSaldo</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">intent </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">PagarActivity::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">putExtra</span><span class="s2">(</span><span class="s4">&quot;sSaldo&quot;</span><span class="s2">, </span><span class="s1">saldo</span><span class="s2">)</span>
+        <span class="s2">}</span>
+  <span class="s5">//      startActivity(intent)</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s1">COD_TELA</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+    <span class="s5">//tvSaldo</span>
+
+    <span class="s0">fun </span><span class="s1">btnTransf_click</span><span class="s2">() {</span>
+        <span class="s0">val </span><span class="s1">txtSaldo </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">txtSaldo</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">saldo </span><span class="s2">= </span><span class="s1">txtSaldo</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">intent </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">TransfActivity::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">putExtra</span><span class="s2">(</span><span class="s4">&quot;sSaldo&quot;</span><span class="s2">, </span><span class="s1">saldo</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s5">//    startActivity(intent)</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s1">COD_TELA</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">fun </span><span class="s1">btnDepos_click</span><span class="s2">() {</span>
+        <span class="s0">val </span><span class="s1">txtSaldo </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">&lt;</span><span class="s1">TextView</span><span class="s2">&gt;(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">txtSaldo</span><span class="s2">)</span>
+        <span class="s0">val </span><span class="s1">saldo </span><span class="s2">= </span><span class="s1">txtSaldo</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()</span>
+        <span class="s0">val </span><span class="s1">intent </span><span class="s2">= </span><span class="s1">Intent</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">DeposActivity::</span><span class="s0">class</span><span class="s2">.</span><span class="s1">java</span><span class="s2">).</span><span class="s1">apply </span><span class="s2">{</span>
+            <span class="s1">putExtra</span><span class="s2">(</span><span class="s4">&quot;sSaldo&quot;</span><span class="s2">, </span><span class="s1">saldo</span><span class="s2">)</span>
+        <span class="s2">}</span>
+  <span class="s5">//      startActivity(intent)</span>
+        <span class="s1">startActivityForResult</span><span class="s2">(</span><span class="s1">intent</span><span class="s2">, </span><span class="s1">COD_TELA</span><span class="s2">)</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+
+
+
+
+</pre>
+</body>
+</html>
